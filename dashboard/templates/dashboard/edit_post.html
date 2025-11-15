@@ -1,0 +1,18 @@
+{% extends 'dashboard/das_base.html' %}
+
+{% block title %}Edit Posts - Xplore{% endblock %}
+
+{% block page_title %}Edit Posts {% endblock %}
+
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="admin-content-box">
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Update Post</button>
+  </form>
+</div>
+{% endblock %}
+

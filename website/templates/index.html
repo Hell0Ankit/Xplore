@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Home page
+{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>{{ hero_key.hero_heading }}</h1>
+            <p>{{ hero_key.sub_para }}</p>
+            <div class="hero-buttons">
+                <a href="{% url 'blog' %}" class="btn btn-primary">{{hero_key.button_text}}</a>
+                {% if not user.is_authenticated %}
+                <a href="{% url 'signup' %}" class="btn btn-secondary">{{hero_key.button_text_2}}</a>
+                {% endif %}        
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">{{works.main_heading}}</h2>
+            <p class="section-subtitle">{{works.sub_para}}</p>
+            
+            <div class="steps">
+                {% for box in workbox %}
+                <div class="step fade-in">
+                    <div class="step-icon "><i class="{{ box.icon_class }}"></i></div>
+                    <h3>{{ box.box_heading}}</h3>
+                    <p>{{ box.box_para}}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div style="text-align: center;">
+                <a href="get-started" class="btn btn-primary">{{works.button_text}}</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Categories -->
+    <section class="explore-categories">
+        <div class="container">
+            <h2 class="section-title">{{explore.main_heading}}</h2>
+            <p class="section-subtitle">{{explore.sub_para}}</p>
+            <div class="categories">
+                {% for card in exploreboxes  %}
+                <div class="category">
+                    <div class="category-icon "> <i class="{{ card.icon_class }}"></i></div>
+                    <h3>{{card.box_heading}}</h3>
+                    <p>{{card.box_para}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Explore Categories  end-->
+
+
+<!-- blog section start -->
+<section class="blog-section" id="homeBlogs">
+    <div class="blog-container">
+        <h2 class="blog-main-heading">{{ spots.main_heading }}</h2>
+        <p class="blog-sub-para">{{ spots.sub_para }}</p>
+        <div class="blog-row">
+            {% for blog_cad in posts %}
+            <div class="blog-col">
+                <div class="blog-card">
+                    <div class="blog-image-wrap">
+                        <img src="{{ blog_cad.blog_image.url }}" alt="Himachal" class="blog-image">
+                    </div>
+                    <div class="blog-card-body">
+                        <h5 class="blog-title"><a href="{% url 'blog-details' blog_cad.slug %}">{{ blog_cad.title }}</a></h5>
+                        <p class="blog-text">{{ blog_cad.short_description | truncatewords:20 }}</p>
+                        <div class="blog-meta">
+                            <span class="blog-author"><i class="fa-solid fa-user"></i> {{ blog_cad.author }}</span>
+                            <span class="blog-category"><i class="fa-solid fa-mountain"></i>  {{ blog_cad.category }}</span>
+                            <span class="blog-time"><i class="fa-regular fa-clock"></i> {{ blog_cad.create_at | timesince }} ago</span>
+                        </div>
+                        <a href="{% url 'blog-details' blog_cad.slug %}" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="btn-blog">
+    <a href="/blog" class="btn btn-primary">See More </a>
+    </div>
+</section>
+<!-- blog section end-->
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>{{ctasection.main_heading}}</h2>
+                <p>{{ctasection.sub_para}}</p>
+                <h3 style="margin: 30px 0 20px; font-size: 24px;">{{ctasection.child_heading}}</h3>
+                <p style="margin-bottom: 40px;">{{ctasection.child_para}}</p>
+                <a href="{{ctasection.button_url}}" class="btn-cta">{{ctasection.button_text}}</a>
+            </div>
+        </div>
+    </section>
+{% endblock  %}

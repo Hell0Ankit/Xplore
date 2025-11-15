@@ -1,0 +1,30 @@
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            
+            <!-- Brand Section -->
+            <div class="footer-section">
+                <h3>{{ brand.brand_name }}</h3>
+                <p>{{ brand.description }}</p>
+            </div>
+
+            <!-- Dynamic Sections -->
+            {% for section in sections %}
+            <div class="footer-section">
+                <h3>{{ section.title }}</h3>
+                <ul>
+                    {% for link in section.links.all %}
+                    <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="footer-bottom">
+            <p>&copy; {{ brand.year }} {{ brand.brand_name }}. All rights reserved. | {{ brand.tagline }}</p>
+        </div> 
+    </div>
+</footer>

@@ -1,0 +1,43 @@
+<header class="site-header">
+  <nav class="site-nav">
+    <!-- Logo -->
+    <div class="site-logo">
+      <a href="{{ header_key.url }}">{{ header_key.logo_text }}</a>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="site-nav-links" id="navMenu">
+      {% for link in nav_key %}
+      <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+      {% endfor %}
+    </ul>
+
+    <!-- Search Bar -->
+    <div class="site-search">
+      <form method="GET" action="{% url 'search'%}">
+        {% csrf_token %}
+        <input type="search" name="keyword" placeholder="Search blog..." required />
+        <button type="submit" class="search-btn">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+    </div>
+
+    <!-- Buttons -->
+    <div class="site-buttons">
+      {% if not user.is_authenticated %}
+      <a href="{% url 'login' %}" class="btn btn-primary">Log in</a>
+      <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
+      {% else %}
+      <span><a href="{% url 'dashboard' %}">Dashboard</a></span>
+      <span><a href="{% url 'logout' %}">logout</a></span>
+      {% endif %}
+    </div>
+
+    <!-- Mobile Toggle -->
+    <button class="site-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+</header>
+

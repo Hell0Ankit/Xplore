@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Home page
+{% endblock %}
+{% block content %}
+    <div class="login-page-wrapper">
+        <div class="login-container">
+            <div class="login-logo">
+                <h1>Xplore</h1>
+            </div>
+
+            <div class="login-header">
+                <h2>Welcome Back!</h2>
+                <p>Login to discover hidden gems near you</p>
+            </div>
+
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="login-form-group">
+                    <label for="username">User Name </label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                    >
+                </div>
+
+                <div class="login-form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="passw"
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <!-- <div class="login-form-options">
+                    <a href="#" class="login-forgot-password">Forgot Password?</a>
+                </div>  -->
+
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+
+            <div class="login-signup-link">
+                Don't have an account? <a href="{% url 'signup' %}">Sign Up</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

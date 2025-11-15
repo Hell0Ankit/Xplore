@@ -1,0 +1,18 @@
+{% extends 'dashboard/das_base.html' %}
+
+{% block title %}Logout - Xplore{% endblock %}
+
+{% block page_title %}Logout{% endblock %}
+
+{% block content %}
+
+<div class="admin-content-box" style="text-align: center; padding: 60px 30px;">
+    <div style="font-size: 4rem; color: #6366f1; margin-bottom: 20px;">
+        <i class="fas fa-sign-out-alt"></i>
+    </div>
+    <h2 style="font-family: 'Poppins', sans-serif; font-size: 2rem; color: #1f2937; margin: 0 0 15px 0;">Logout</h2>
+    <p style="color: #6b7280; margin: 0 0 30px 0;">Are you sure you want to logout?</p>
+    <a href="{% url 'logout' %}" class="admin-btn-primary">Confirm Logout</a>
+</div>
+
+{% endblock %}

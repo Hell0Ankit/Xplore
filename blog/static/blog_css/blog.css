@@ -1,0 +1,119 @@
+        .blog-hero-section {
+            background: linear-gradient(rgba(102, 126, 234, 0.85), rgba(118, 75, 162, 0.85));
+            background-size: cover;
+            background-position: center;
+            padding: 150px 20px 100px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .blog-hero-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: #f8fafc;
+            clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .blog-breadcrumb {
+            font-size: 0.9rem;
+            margin: 0 0 20px 0;
+            opacity: 0.9;
+        }
+
+        .blog-breadcrumb i {
+            margin: 0 8px;
+            font-size: 0.7rem;
+        }
+
+        .blog-hero-section h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 0 0 25px 0;
+            letter-spacing: -2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-hero-section p {
+            font-size: 1.3rem;
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        
+        .homepage-filter-section {
+            background: rgb(239, 239, 239);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin: 60px auto;
+            max-width: 1200px;
+        }
+
+        .homepage-filter-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 25px 0;
+            text-align: center;
+        }
+
+        .homepage-filter-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .homepage-filter-link {
+            padding: 12px 24px;
+            background: #f3f4f6;
+            color: #6b7280;
+            border: 2px solid transparent;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .homepage-filter-link:hover {
+            color: #e5e7eb;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: translateY(-2px);
+            border-color: transparent;
+
+        }
+
+
+        @media (max-width: 768px) {
+            .blog-hero-section {
+                padding: 100px 20px 60px;
+            }
+
+            .blog-hero-section h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .homepage-filter-section {
+                padding: 30px 20px;
+            }
+
+            .homepage-filter-wrapper {
+                gap: 10px;
+            }
+
+            .homepage-filter-link {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+        }

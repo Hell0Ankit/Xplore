@@ -1,0 +1,38 @@
+<aside class="admin-sidebar">
+    <div class="admin-logo">
+        <h2><a href="{% url 'home' %}" style="color:#fff; text-decoration:none;">Xplore</a></h2>
+    </div>
+    <ul class="admin-nav">
+        <li class="admin-nav-item">
+            <a href="{% url 'dashboard' %}" class="admin-nav-link {% if request.resolver_match.url_name == 'dashboard' %}nav-active{% endif %}">
+                <i class="fas fa-th-large"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="admin-nav-item">
+            <a href="{% url 'das_category' %}" class="admin-nav-link {% if request.resolver_match.url_name == 'das_category' %}nav-active{% endif %}">
+                <i class="fas fa-tags"></i>
+                <span>Category</span>
+            </a>
+        </li>
+        <li class="admin-nav-item">
+            <a href="{% url 'das_post' %}" class="admin-nav-link {% if request.resolver_match.url_name == 'das_post' %}nav-active{% endif %}">
+                <i class="fas fa-blog"></i>
+                <span>Posts</span>
+            </a>
+        </li>
+        <li class="admin-nav-item">
+            <a href="{% url 'users' %}" class="admin-nav-link {% if request.resolver_match.url_name == 'users' %}nav-active{% endif %}">
+                <i class="fa-regular fa-user"></i>
+                <span>Users</span>
+            </a>
+        </li>
+
+        <li class="admin-nav-item">
+            <a href="{% url 'das_logout' %}" class="admin-nav-link {% if request.resolver_match.url_name == 'das_logout' %}nav-active{% endif %}">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </li>
+    </ul>
+</aside>

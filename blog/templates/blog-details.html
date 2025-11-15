@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Blog Detail Page
+{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<section class="blog-detail-hero">
+   <p class="blog-detail-breadcrumb">
+      <i class="fas fa-home"></i> Home <i class="fas fa-chevron-right"></i> Blog <i class="fas fa-chevron-right"></i> Blog Post
+   </p>
+   <h1>{{blog_details.title}}</h1>
+   <div class="blog-detail-meta">
+      <span><i class="far fa-calendar"></i> {{blog_details.create_at | timesince}}</span>
+      <span><i class="fa-solid fa-user"></i> {{blog_details.author}}</span>
+      <span><i class="far fa-eye"></i> {{blog_details.category}}</span>
+   </div>
+</section>
+<!-- Main Content -->
+<section class="blog-detail-container">
+   <div class="blog-detail-featured-image">
+      <img src="{{ blog_details.blog_image.url }}" alt="">
+   </div>
+   <article class="blog-detail-content">
+      <!-- Article Content -->       
+      <h2>{{blog_details.title}}</h2>
+      <p>{{blog_details.blog_body}}</p>
+      <!-- Tags -->
+      <div class="blog-detail-tags">
+         {% for category_tag in categories %}
+         <a href="{% url 'posts_by_category' category_tag.id %}" class="blog-detail-tag"><i class="fas fa-tag"></i> {{ category_tag.category_name}}</a>
+         {% endfor %}
+      </div>
+   </article>
+</section>
+{% endblock %}

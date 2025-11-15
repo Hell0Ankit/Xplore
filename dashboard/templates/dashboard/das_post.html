@@ -1,0 +1,56 @@
+{% extends 'dashboard/das_base.html' %}
+
+{% block title %}Blog Posts - Xplore{% endblock %}
+
+{% block page_title %}Blog Posts{% endblock %}
+
+{% block content %}
+<div class="admin-content-box">
+    <div class="admin-box-header">
+        <h2 class="admin-box-title">Blog Posts</h2>
+        <a href="{% url 'add_posts' %}" class="admin-btn-primary">
+            <i class="fas fa-plus"></i> Add Blog Posts
+        </a>
+    </div>
+
+    <table class="admin-data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Author</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for blog_item in blog %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td class="admin-table-title">{{ blog_item.title }}</td>
+                <td>{{ blog_item.category }}</td>
+                <td>{{ blog_item.author }}</td>
+                <td>{{ blog_item.create_at|date:"M d, Y" }}</td>
+                <td><span class="admin-badge badge-success">{{ blog_item.status }}</span></td>
+                <td>
+                    <div class="admin-action-buttons">
+                        <a href="{% url 'edit_post' blog_item.pk %}" class="admin-btn-action admin-btn-edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{% url 'delete_post' blog_item.id %}" class="admin-btn-action admin-btn-delete">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 30px;">No posts found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

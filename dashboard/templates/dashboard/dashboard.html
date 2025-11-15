@@ -1,0 +1,31 @@
+{% extends 'dashboard/das_base.html' %}
+
+{% block title %}Dashboard - Xplore{% endblock %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- Stats -->
+<div class="admin-stats-grid">
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon icon-blue">
+            <i class="fas fa-blog"></i>
+        </div>
+        <div class="admin-stat-number">{{ blog_count }}</div>
+        <div class="admin-stat-label">Total Posts</div>
+    </div>
+
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon icon-green">
+            <i class="fas fa-tags"></i>
+        </div>
+        <div class="admin-stat-number">{{ category_count }}</div>
+        <div class="admin-stat-label">Categories</div>
+    </div>
+</div>
+
+{% comment %} <div class="admin-content-box">
+    <h2 class="admin-box-title">Recent Activity</h2>
+    <p style="color: #6b7280; line-height: 1.6;">Welcome to your dashboard! Here you can manage your posts, categories, and view analytics.</p>
+</div> {% endcomment %}
+{% endblock %}

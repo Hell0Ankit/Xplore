@@ -1,0 +1,247 @@
+        .about-hero-section {
+            background: linear-gradient(rgba(102, 126, 234, 0.85), rgba(118, 75, 162, 0.85));
+            background-position: center;
+            padding: 150px 20px 100px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .about-hero-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .about-breadcrumb {
+            font-size: 0.9rem;
+            margin: 0 0 20px 0;
+            opacity: 0.9;
+        }
+
+        .about-breadcrumb i {
+            margin: 0 8px;
+            font-size: 0.7rem;
+        }
+
+        .about-hero-section h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 0 0 25px 0;
+            letter-spacing: -2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-hero-section p {
+            font-size: 1.3rem;
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .about-story-section {
+            padding: 100px 0;
+            background: #fff;
+        }
+
+        .about-story-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-story-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-story-image::before {
+            content: '';
+            display: block;
+            padding-bottom: 75%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .about-story-image i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 6rem;
+            color: white;
+            opacity: 0.3;
+        }
+
+        .about-story-content {
+            padding: 20px 0;
+        }
+
+        .about-section-label {
+            color: #6366f1;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-story-content h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin: 0 0 30px 0;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .about-story-content p {
+            font-size: 1.05rem;
+            color: #4b5563;
+            line-height: 1.9;
+            margin: 0 0 20px 0;
+        }
+
+        .about-story-highlight {
+            background: #f8fafc;
+            border-left: 4px solid #6366f1;
+            padding: 20px 25px;
+            margin: 30px 0;
+            font-style: italic;
+            color: #374151;
+        }
+
+        .about-stats-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .about-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            text-align: center;
+        }
+
+        .about-stat-item i {
+            font-size: 3rem;
+            margin: 0 0 15px 0;
+            opacity: 0.9;
+        }
+
+        .about-stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            display: block;
+        }
+
+        .about-stat-label {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .about-values-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .about-values-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .about-values-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin: 0 0 20px 0;
+            letter-spacing: -1px;
+        }
+
+        .about-values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+
+        .about-value-item {
+            padding: 40px 30px;
+            background: #f8fafc;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border-left: 5px solid #6366f1;
+        }
+
+        .about-value-item:hover {
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .about-value-item i {
+            font-size: 2.5rem;
+            color: #6366f1;
+            margin: 0 0 20px 0;
+            display: block;
+        }
+
+        .about-value-item h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 12px 0;
+        }
+
+        .about-value-item p {
+            color: #6b7280;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-hero-section p {
+                font-size: 1.1rem;
+            }
+
+            .about-story-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .about-story-content h2,
+            .about-values-title {
+                font-size: 2.2rem;
+            }
+
+            .about-values-grid,
+            .about-stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-hero-section {
+                padding: 120px 20px 80px;
+            }
+        }

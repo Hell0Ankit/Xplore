@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Blog - Xplore
+{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<section class="gallery-hero-section">
+   <p class="gallery-breadcrumb">
+      <i class="fas fa-home"></i> Home <i class="fas fa-chevron-right"></i> Gallery
+   </p>
+   <h1>{{gallery_breadcrumb.title}}</h1>
+   <p>{{gallery_breadcrumb.para}}</p>
+</section>
+<!-- Gallery section start-->
+<section class="gallery-container">
+   <div class="gallery-grid">
+      {% for gallery in gallery_images %}
+      <div class="gallery-item">
+         <div class="gallery-image">
+            <img src="{{ gallery.image.url }}" alt="City Fountain Square">
+            <span class="gallery-category-badge">{{gallery.category}}</span>
+         </div>
+         <div class="gallery-overlay">
+            <h3 class="gallery-title">{{gallery.title}}</h3>
+            <p class="gallery-location"><i class="fas fa-map-marker-alt"></i>{{gallery.location}}</p>
+         </div>
+      </div>
+      {% endfor %}     
+   </div>
+</section>
+<!-- Gallery Section  start -->
+{% endblock %}

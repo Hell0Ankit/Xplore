@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard - Xplore{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    {% block extra_css %}{% endblock %}
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+        }
+
+        .admin-dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .admin-sidebar {
+            width: 260px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 0;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .admin-logo {
+            padding: 0 30px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+        }
+
+        .admin-logo h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .admin-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .admin-nav-item {
+            padding: 0;
+            margin: 5px 15px;
+        }
+
+        .admin-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 15px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-nav-link:hover,
+        .admin-nav-link.nav-active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .admin-nav-link i {
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        /* Main Content */
+        .admin-main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 30px;
+        }
+
+        .admin-page-header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-page-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .admin-user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .admin-user-details h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 2px 0;
+        }
+
+        .admin-user-details p {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin: 0;
+        }
+
+        /* Stats Cards */
+        .admin-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .admin-stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .admin-stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .admin-stat-icon.icon-blue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .admin-stat-icon.icon-green {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .admin-stat-icon.icon-orange {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .admin-stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 5px 0;
+        }
+
+        .admin-stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Content Box */
+        .admin-content-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .admin-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .admin-box-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .admin-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .admin-btn-secondry {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 24px;
+            background:  #fa0909ff ;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn-secondry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(241, 99, 99, 0.3);
+        }
+
+
+        /* Table */
+        .admin-data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-data-table thead {
+            background: #f8fafc;
+        }
+
+        .admin-data-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .admin-data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f3f4f6;
+            color: #6b7280;
+        }
+
+        .admin-data-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .admin-table-title {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .admin-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .admin-badge.badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .admin-badge.badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .admin-action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-btn-action {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-btn-edit {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .admin-btn-edit:hover {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .admin-btn-delete {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .admin-btn-delete:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .admin-sidebar {
+                width: 70px;
+            }
+
+            .admin-logo h2,
+            .admin-nav-link span {
+                display: none;
+            }
+
+            .admin-main-content {
+                margin-left: 70px;
+            }
+
+            .admin-nav-link {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-dashboard-wrapper {
+                flex-direction: column;
+            }
+
+            .admin-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .admin-main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .admin-page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .admin-data-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+
+
+.form-title {
+    font-size: 1.4rem;
+    color: #222;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-form .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-form label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.admin-form input[type="text"] {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.admin-form input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+.form-actions {
+    text-align: right;
+}
+
+.form-actions button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.form-actions button:hover {
+    background-color: #0056b3;
+}
+
+.form-actions i {
+    margin-right: 5px;
+}
+
+@media (max-width: 600px) {
+    .admin-content-box {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .form-actions {
+        text-align: center;
+    }
+}
+
+
+
+
+        
+    </style>
+</head>
+<body>
+    <div class="admin-dashboard-wrapper">
+        <!-- Sidebar -->
+        {% include 'dashboard/includes/das_sidebar.html' %}
+
+        <!-- Main Content -->
+        <main class="admin-main-content">
+            <!-- Page Header -->
+            <div class="admin-page-header">
+                <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+                <div class="admin-user-info">
+                    <div class="admin-user-avatar">AD</div>
+                    <div class="admin-user-details">
+                        <h3>{{ request.user.username|default:"Admin User" }}</h3>
+                        <p>{{ request.user.email|default:"admin@xplore.com" }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- Messages -->
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                alert("{{ message|escapejs }}");
+            {% endfor %}
+        </script>
+    {% endif %}
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

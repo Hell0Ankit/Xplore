@@ -1,0 +1,29 @@
+{% extends 'dashboard/das_base.html' %}
+
+{% block title %}Edit Categories - Xplore{% endblock %}
+
+{% block page_title %}Edit Categories {% endblock %}
+
+{% block content %}
+<div class="admin-content-box">
+
+    <form action="" method="POST" class="admin-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="category_name">Category Name</label>
+            <input 
+                type="text" 
+                name="category_name" 
+                id="category_name"
+                value="{{ category.category_name }}"
+                required>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="admin-btn-primary"><i class="fas fa-save"></i> Update</button>
+            <a href="{% url 'das_category' %}" class="admin-btn-secondry">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

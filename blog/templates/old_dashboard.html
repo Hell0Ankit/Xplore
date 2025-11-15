@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Xplore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+
+        .dashboard-wrapper {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            min-height: 100vh;
+            background: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sidebar */
+        .dashboard-sidebar {
+            width: 260px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 0;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .dashboard-logo {
+            padding: 0 30px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+        }
+
+        .dashboard-logo h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .dashboard-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-menu-item {
+            padding: 0;
+            margin: 5px 15px;
+        }
+
+        .dashboard-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 15px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-menu-link:hover,
+        .dashboard-menu-link.active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .dashboard-menu-link i {
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        /* Main Content */
+        .dashboard-main {
+            flex: 1;
+            margin-left: 260px;
+            padding: 30px;
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .dashboard-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .dashboard-user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .dashboard-user-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 2px 0;
+        }
+
+        .dashboard-user-info p {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin: 0;
+        }
+
+        /* Stats Cards */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .stat-card-icon.blue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .stat-card-icon.green {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .stat-card-icon.orange {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .stat-card-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 5px 0;
+        }
+
+        .stat-card-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Content Section */
+        .dashboard-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .content-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .btn-add {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Table */
+        .blog-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .blog-table thead {
+            background: #f8fafc;
+        }
+
+        .blog-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .blog-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f3f4f6;
+            color: #6b7280;
+        }
+
+        .blog-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .blog-title {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .blog-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .blog-status.published {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .blog-status.draft {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .blog-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-edit {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .btn-edit:hover {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .btn-delete:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .dashboard-sidebar {
+                width: 70px;
+            }
+
+            .dashboard-logo h2,
+            .dashboard-menu-link span {
+                display: none;
+            }
+
+            .dashboard-main {
+                margin-left: 70px;
+            }
+
+            .dashboard-menu-link {
+                justify-content: center;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-wrapper {
+                flex-direction: column;
+            }
+
+            .dashboard-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .dashboard-main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .blog-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="dashboard-logo">
+                <h2>Xplore</h2>
+            </div>
+            <ul class="dashboard-menu">
+                <li class="dashboard-menu-item">
+                    <a href="#" class="dashboard-menu-link active">
+                        <i class="fas fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="dashboard-menu-item">
+                    <a href="#" class="dashboard-menu-link">
+                        <i class="fas fa-blog"></i>
+                        <span>Blog Posts</span>
+                    </a>
+                </li>
+                <li class="dashboard-menu-item">
+                    <a href="#" class="dashboard-menu-link">
+                        <i class="fas fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+                <li class="dashboard-menu-item">
+                    <a href="#" class="dashboard-menu-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="dashboard-menu-item">
+                    <a href="#" class="dashboard-menu-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <h1>Dashboard</h1>
+                <div class="dashboard-user">
+                    <div class="dashboard-user-avatar">AJ</div>
+                    <div class="dashboard-user-info">
+                        <h3>Admin User</h3>
+                        <p>admin@xplore.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-card-icon blue">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                    <div class="stat-card-number">24</div>
+                    <div class="stat-card-label">Total Blogs</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-card-number">18</div>
+                    <div class="stat-card-label">Published</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-icon orange">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="stat-card-number">6</div>
+                    <div class="stat-card-label">Drafts</div>
+                </div>
+            </div>
+
+            <!-- Blog List -->
+            <div class="dashboard-content">
+                <div class="content-header">
+                    <h2>Blog Posts</h2>
+                    <a href="#" class="btn-add">
+                        <i class="fas fa-plus"></i> Add New Blog
+                    </a>
+                </div>
+
+                <table class="blog-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="blog-title">10 Hidden Coffee Shops You Must Visit</td>
+                            <td>Sarah Miller</td>
+                            <td>Oct 1, 2025</td>
+                            <td><span class="blog-status published">Published</span></td>
+                            <td>
+                                <div class="blog-actions">
+                                    <a href="#" class="btn-action btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn-action btn-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="blog-title">Street Food Paradise: A Culinary Tour</td>
+                            <td>Alex Johnson</td>
+                            <td>Sep 28, 2025</td>
+                            <td><span class="blog-status published">Published</span></td>
+                            <td>
+                                <div class="blog-actions">
+                                    <a href="#" class="btn-action btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn-action btn-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="blog-title">Best Instagram Spots in Downtown</td>
+                            <td>Marcus Williams</td>
+                            <td>Sep 25, 2025</td>
+                            <td><span class="blog-status draft">Draft</span></td>
+                            <td>
+                                <div class="blog-actions">
+                                    <a href="#" class="btn-action btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn-action btn-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="blog-title">Secret Gardens and Parks to Explore</td>
+                            <td>Lisa Thompson</td>
+                            <td>Sep 22, 2025</td>
+                            <td><span class="blog-status published">Published</span></td>
+                            <td>
+                                <div class="blog-actions">
+                                    <a href="#" class="btn-action btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn-action btn-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="blog-title">Underground Art Scene Gallery Guide</td>
+                            <td>Raj Kumar</td>
+                            <td>Sep 20, 2025</td>
+                            <td><span class="blog-status draft">Draft</span></td>
+                            <td>
+                                <div class="blog-actions">
+                                    <a href="#" class="btn-action btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn-action btn-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

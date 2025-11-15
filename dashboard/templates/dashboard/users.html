@@ -1,0 +1,88 @@
+{% extends 'dashboard/das_base.html' %}
+
+{% block title %}Users - Xplore{% endblock %}
+
+{% block page_title %} Users{% endblock %}
+
+{% block content %}
+<div class="admin-content-box">
+    <div class="admin-box-header">
+        <h2 class="admin-box-title">All Users</h2>
+        <a href="{% url 'add_user' %}" class="admin-btn-primary">
+            <i class="fas fa-plus"></i> Add New Users 
+        </a>
+    </div>
+
+    <table class="admin-data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name </th>
+                <th>User Name </th>
+                <th>Email </th>
+                <th>Active</th>
+                <th>Staff</th>
+                <th>Super User</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td class="admin-table-title">{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <!-- Active -->
+                <td>
+                    {% if user.is_active %}
+                        <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+                    <i class="fa-regular fa-xmark"></i>
+                    {% endif %}
+                </td>
+
+                <!-- Staff -->
+                <td>
+                    {% if user.is_staff %}
+                    <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+                    <i class="fa-solid fa-xmark"></i>
+
+
+                    {% endif %}
+                </td>
+
+                <!-- Superuser -->
+                <td>
+                    {% if user.is_superuser %}
+                    <i class="fa-solid fa-check"></i>
+                    {% else %}
+                    <i class="fa-solid fa-xmark"></i>
+
+
+                    {% endif %}
+                </td>
+
+                <td>
+                    <div class="admin-action-buttons">
+                        <a href="{% url 'edit_user' user.id %}" class="admin-btn-action admin-btn-edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{% url 'delete_user' user.id %}" class="admin-btn-action admin-btn-delete">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 30px;">No posts found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

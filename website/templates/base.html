@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Xplore - Discover Hidden Gems Near You {% endblock title %}</title>
+
+<!-- Website app css links--> 
+    <link rel="stylesheet" href="{% static 'web_css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'web_css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'web_css/gallery.css' %}">
+    <link rel="stylesheet" href="{% static 'web_css/contact.css' %}">
+    <link rel="stylesheet" href="{% static 'web_css/terms-condition.css' %}">
+<!-- Account app css links--> 
+    <link rel="stylesheet" href="{% static 'account_css/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'account_css/login.css' %}">
+<!-- blog app css links--> 
+    <link rel="stylesheet" href="{% static 'blog_css/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'blog_css/blog-details.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+{% include "partial/header.html" %}
+
+{% block content %}
+
+{% endblock content %}
+{% include "partial/fotter.html" %}
+
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/gallery.js' %}"></script>
+
+</body>
+</html>

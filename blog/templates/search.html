@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Blog - Xplore
+{% endblock %}
+{% block content %}
+<!-- Blog Breadcrumb Hero Section -->
+<section class="blog-hero-section">
+   <p class="blog-breadcrumb">
+      <i class="fas fa-home"></i> Home <i class="fas fa-chevron-right"></i> Search keyword by
+   </p>
+   <h1>{{keyword}}</h1>
+</section>
+
+
+<section class="blog-section" id="homeBlogs">
+   <div class="blog-container">
+      <div class="blog-row">
+         {% for serch_title in blogs %}
+         <div class="blog-col">
+            <div class="blog-card">
+               <div class="blog-image-wrap">
+                  <img src="{{ serch_title.blog_image.url }}" alt="Himachal" class="blog-image">
+               </div>
+               <div class="blog-card-body">
+                  <h5 class="blog-title"><a href="{% url 'blog-details' serch_title.slug %}">{{ serch_title.title }}</a></h5>
+                  <p class="blog-text">{{ serch_title.short_description | truncatewords:20 }}</p>
+                  <div class="blog-meta">
+                     <span class="blog-author"><i class="fa-solid fa-user"></i> {{ serch_title.author }}</span>
+                     <span class="blog-category"><i class="fa-solid fa-mountain"></i>  {{ serch_title.category }}</span>
+                     <span class="blog-time"><i class="fa-regular fa-clock"></i> {{ serch_title.create_at | timesince }} ago</span>
+                  </div>
+                  <a href="{% url 'blog-details' serch_title.slug %}" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+</section>
+<!-- Blog Blog-Card Section Section close -->
+{% endblock %}
